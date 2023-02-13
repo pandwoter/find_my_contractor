@@ -37,5 +37,7 @@ result_file.with_csv_file do |file|
     end
 
     PROGRESS_BAR.increment
+  rescue StandardError => e
+    PROGRESS_BAR.log("ERROR OCCURED FOR CODE: #{code}, #{e}")
   end
 end
