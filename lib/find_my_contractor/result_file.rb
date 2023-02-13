@@ -7,16 +7,12 @@ class ResultFile
 
   def initialize
     delete if exists?
-
-    @file = CSV.open("cats.csv", "w")
   end
 
-  def <<(...)
-    @file.<<(...)
-  end
-
-  def close
-    @file.close
+  def with_csv_file(&block)
+    CSV.open(PATH, "w") do |csv_file|
+      block.call(csv_file)
+    end
   end
 
   private

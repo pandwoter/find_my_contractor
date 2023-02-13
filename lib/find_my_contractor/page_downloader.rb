@@ -24,7 +24,7 @@ class PageDownloader
 
   def download(zip_code)
     Nokogiri::HTML(
-      HTTParty.post(URL, body: form_post_body(zip_code: zip_code), headers: HEADERS)
+      HTTParty.post(URL, body: form_post_body(zip_code: zip_code), headers: HEADERS).body
     )
   end
 
