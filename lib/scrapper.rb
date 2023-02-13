@@ -37,8 +37,5 @@ result_file.with_csv_file do |file|
     end
 
     PROGRESS_BAR.increment
-  rescue StandardError => e
-    puts "ERROR OCCURED #{e}"
-    raise e
   end
 end
