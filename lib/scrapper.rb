@@ -14,9 +14,9 @@ ZIP_CODES = YAML.safe_load(
   IO.read(
     "#{File.dirname(__FILE__)}/find_my_contractor/zip_codes.yml"
   )
-).freeze
+)['codes'].freeze
 
-PROGRESS_BAR = ProgressBar.create(title: "Zips processed", total: ZIP_CODES['codes'].size)
+PROGRESS_BAR = ProgressBar.create(title: "Zips processed", total: ZIP_CODES.size)
 
 result_file = ResultFile.new
 page_downloader = PageDownloader.new
@@ -26,7 +26,7 @@ result_file.with_csv_file do |file|
   file << HEADERS
 
   PROGRESS_BAR.log('STARTING PROCESS!')
-  ZIP_CODES['codes'].each do |code|
+  ZIP_CODES.each do |code|
     PROGRESS_BAR.log("PARSING #{code}")
     nokogiri_page = page_downloader.download(code)
     extracted_info = Parser.new(nokogiri_page).extract_info!
